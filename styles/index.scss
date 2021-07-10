@@ -1,0 +1,17 @@
+@import './core/_reset';
+@import './core/_variables';
+
+@import './components/_hero';
+@import './components/_filter-steps';
+@import './components/_plant-list';
+
+body {
+  font-family: $font-family;
+  font-weight: 300;
+  background-color: $white;
+}
+
+.container {
+  max-width: $container;
+  margin: 0 auto;
+}

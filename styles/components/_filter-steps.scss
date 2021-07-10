@@ -1,0 +1,82 @@
+.filter-steps {
+  padding: 47px 0 53px;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &__item {
+    max-width: 25%;
+
+    img {
+      display: block;
+    }
+
+    p {
+      margin: 15px 0;
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+}
+
+.select-component {
+  margin-top: 24px;
+  position: relative;
+  border-radius: 19px;
+  height: 40px;
+  cursor: pointer;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    right: 13px;
+    background-image: url('../images/icons/select-arrow-down.svg');
+    width: 18px;
+    height: 9px;
+  }
+
+  ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: $white;
+    border: 1px solid $border-gray;
+    border-radius: 19px;
+    overflow: hidden;
+
+    li {
+      padding: 0 18px;
+      height: 40px;
+      display: none;
+      align-items: center;
+
+      &.active {
+        display: flex;
+      }
+      &:not(:first-child):hover {
+        background-color: $highlight-color;
+        color: $white;
+      }
+    }
+  }
+
+  // &--open {
+  &:hover {
+    overflow: visible;
+
+    &:after {
+      transform: scaleY(-1);
+    }
+
+    ul {
+      li {
+        display: flex;
+      }
+    }
+  }
+}

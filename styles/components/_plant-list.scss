@@ -1,0 +1,28 @@
+.plant-list {
+  background-color: $gray;
+  padding: 37px 0 67px;
+}
+
+.no-result {
+  font-size: 16px;
+  line-height: 27px;
+  color: #a9a9a9;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &__column {
+    width: 50%;
+
+    &--center {
+      text-align: center;
+    }
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 45px;
+    line-height: 55px;
+    margin-bottom: 13px;
+  }
+}

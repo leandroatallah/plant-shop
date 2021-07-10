@@ -1,0 +1,60 @@
+.hero-banner {
+  padding: 60px 0 54px;
+  background-color: $highlight-color;
+  position: relative;
+
+  &__bg {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    &--left {
+      left: 0;
+      width: 60%;
+      background-position: center right;
+    }
+
+    &--center {
+      left: 55%;
+      right: 21%;
+      width: 24%;
+      background-position: center;
+    }
+
+    &--right {
+      right: 0;
+      width: 25%;
+      background-position: center left;
+    }
+  }
+
+  &__caption {
+    position: relative;
+    width: 50%;
+    z-index: 10;
+
+    h1 {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 70px;
+      line-height: 85px;
+      color: $white;
+      margin: 45px 0 30px;
+    }
+  }
+
+  &__scroll-button {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    cursor: pointer;
+
+    &:hover {
+      //
+    }
+  }
+}

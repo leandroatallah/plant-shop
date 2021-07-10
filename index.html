@@ -5,13 +5,128 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./index.scss" />
+    <link rel="stylesheet" href="./styles/index.scss" />
   </head>
 
   <body>
-    <img src="images/icons/logo-white.svg" alt="Greenthumb" />
+    <section class="hero-banner">
+      <div
+        class="hero-banner__bg hero-banner__bg--left"
+        style="background-image: url(images/hero/desktop/left-leaves.png)"
+      ></div>
+      <div
+        class="hero-banner__bg hero-banner__bg--center"
+        style="background-image: url(images/hero/desktop/plantperson.png)"
+      ></div>
+      <div
+        class="hero-banner__bg hero-banner__bg--right"
+        style="background-image: url(images/hero/desktop/right-leaves.png)"
+      ></div>
+
+      <div class="container">
+        <div class="hero-banner__caption">
+          <div class="hero-banner__column">
+            <img src="images/icons/logo-white.svg" alt="green thumb." />
+          </div>
+
+          <h1>Find your next green friend</h1>
+
+          <button type="button" class="hero-banner__scroll-button">
+            <img src="images/icons/arrow-down.svg" alt="Scroll page" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="filter-steps">
+      <div class="filter-steps__container container">
+        <div class="filter-steps__item">
+          <img
+            src="images/illustrations/sun.png"
+            alt="sun"
+            width="75"
+            height="75"
+          />
+          <p>
+            <strong>1.</strong> Set the amount of <strong>sunlight</strong> your
+            plant will get.
+          </p>
+          <div class="select-component" id="sunlight">
+            <input type="hidden" name="sunlight" value="" />
+            <ul>
+              <li class="active">Select...</li>
+              <li id="no-sunlight">No sunlight</li>
+              <li id="low-sunlight">Low sunlight</li>
+              <li id="high-sunlight">High sunlight</li>
+            </ul>
+          </div>
+        </div>
+        <div class="filter-steps__item">
+          <img
+            src="images/illustrations/wateringcan.png"
+            alt="watering can"
+            width="103"
+            height="75"
+          />
+          <p>
+            <strong>2.</strong> How often do you want to <strong>water</strong>
+            your plant?
+          </p>
+          <div class="select-component" id="water">
+            <input type="hidden" name="water" value="" />
+            <ul>
+              <li class="active">Select...</li>
+              <li id="rarely">Rarely</li>
+              <li id="regularly">Regularly</li>
+              <li id="daily">Daily</li>
+            </ul>
+          </div>
+        </div>
+        <div class="filter-steps__item">
+          <img
+            src="images/illustrations/dog.png"
+            alt="dog"
+            width="75"
+            height="63"
+          />
+          <p>
+            <strong>3.</strong> Do you have pets? Do they
+            <strong>chew</strong> plants?
+          </p>
+          <div class="select-component" id="toxicity">
+            <input type="hidden" name="toxicity" value="" />
+            <ul>
+              <li class="active">Select...</li>
+              <li id="no">No/They don't care</li>
+              <li id="yes">Yes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="plant-list">
+      <div class="plant-list__container container">
+        <div class="no-result">
+          <div class="no-result">
+            <div class="no-result__column">
+              <p class="no-result__title">No results yet…</p>
+              <p>
+                Use the filters above to find <br />the plant that best fits
+                your <br />environment :)
+              </p>
+            </div>
+            <div class="no-result__column no-result__column--center">
+              <img src="images/illustrations/no-results.png" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="scripts/select-component.js"></script>
   </body>
 </html>
