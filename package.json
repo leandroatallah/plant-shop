@@ -4,7 +4,8 @@
   "description": "Simple Parcel Sandbox",
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html --open"
+    "start": "parcel index.html --open",
+    "build": "parcel index.html"
   },
   "dependencies": {
     "@babel/runtime": "^7.14.6",
