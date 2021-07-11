@@ -1,6 +1,7 @@
 @import './core/_reset';
 @import './core/_variables';
 
+@import './components/_buttons';
 @import './components/_hero';
 @import './components/_filter-steps';
 @import './components/_plant-list';
@@ -9,9 +10,21 @@ body {
   font-family: $font-family;
   font-weight: 300;
   background-color: $white;
+  min-height: 100vh;
+  font-size: 16px;
 }
 
 .container {
+  width: 100%;
   max-width: $container;
   margin: 0 auto;
+  box-sizing: border-box;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 0 38px;
+  }
+}
+
+.hide {
+  display: none;
 }

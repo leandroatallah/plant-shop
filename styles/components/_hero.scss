@@ -1,60 +1,120 @@
 .hero-banner {
-  padding: 60px 0 54px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: $highlight-color;
   position: relative;
+  overflow: hidden;
+
+  &__logo {
+    width: 213px;
+
+    @media (max-width: $breakpoint-mobile) {
+      width: 162px;
+    }
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    max-height: 100vh;
+    min-height: 593px;
+    box-sizing: border-box;
+    padding-top: 40px;
+    align-items: flex-start;
+
+    &:after {
+      content: '';
+      display: block;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 68%;
+      background-image: url('../images/hero/mobile/mobile-leaves.png');
+      background-size: 100%;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+  }
 
   &__bg {
     position: absolute;
     top: 0;
     height: 100%;
     background-size: cover;
-    background-size: contain;
     background-repeat: no-repeat;
 
     &--left {
       left: 0;
       width: 60%;
       background-position: center right;
+      background-image: url('../images/hero/desktop/left-leaves.png');
+
+      @media (max-width: $breakpoint-mobile) {
+        display: none;
+      }
     }
 
     &--center {
       left: 55%;
       right: 21%;
       width: 24%;
+      background-size: contain;
       background-position: center;
+      background-image: url('../images/hero/desktop/plantperson.png');
+
+      @media (max-width: $breakpoint-mobile) {
+        top: unset;
+        left: 50%;
+        right: unset;
+        height: 39%;
+        bottom: 25px;
+        width: 86%;
+        transform: translateX(-50%);
+        background-position: center bottom;
+        background-image: url('../images/hero/mobile/mobile-plantperson.png');
+      }
     }
 
     &--right {
       right: 0;
       width: 25%;
       background-position: center left;
+      background-image: url('../images/hero/desktop/right-leaves.png');
+
+      @media (max-width: $breakpoint-mobile) {
+        display: none;
+      }
     }
   }
 
   &__caption {
     position: relative;
-    width: 50%;
     z-index: 10;
 
     h1 {
       font-style: normal;
       font-weight: 700;
-      font-size: 70px;
+      font-size: 4.3rem;
       line-height: 85px;
       color: $white;
       margin: 45px 0 30px;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 2.5rem;
+        line-height: 1.22;
+        margin: 35px 0 16px;
+      }
     }
   }
 
   &__scroll-button {
-    background: transparent;
-    padding: 0;
-    margin: 0;
     display: inline-block;
-    cursor: pointer;
+    transition: opacity 0.25s ease;
 
     &:hover {
-      //
+      opacity: 0.5;
     }
   }
 }

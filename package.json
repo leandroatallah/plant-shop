@@ -7,10 +7,12 @@
     "start": "parcel index.html --open"
   },
   "dependencies": {
+    "@babel/runtime": "^7.14.6",
     "eslint-config-airbnb-base": "^14.2.1",
     "parcel": "1.12.4"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.14.5",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",

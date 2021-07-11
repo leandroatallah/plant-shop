@@ -1,14 +1,31 @@
 .filter-steps {
   padding: 47px 0 53px;
 
+  @media (max-width: $breakpoint-mobile) {
+    padding: 18px 0 38px;
+  }
+
   &__container {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+
+    @media (max-width: $breakpoint-mobile) {
+      flex-wrap: wrap;
+    }
   }
 
   &__item {
-    max-width: 25%;
+    width: 25%;
+
+    @media (max-width: $breakpoint-mobile) {
+      width: 100%;
+      margin-bottom: 50px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
 
     img {
       display: block;
@@ -16,7 +33,7 @@
 
     p {
       margin: 15px 0;
-      font-size: 14px;
+      font-size: 0.875rem;
       line-height: 22px;
     }
   }
@@ -47,16 +64,19 @@
     background-color: $white;
     border: 1px solid $border-gray;
     border-radius: 19px;
-    overflow: hidden;
+    pointer-events: none;
 
     li {
       padding: 0 18px;
       height: 40px;
       display: none;
       align-items: center;
+      user-select: none;
+      pointer-events: initial;
 
-      &.active {
+      &:first-child {
         display: flex;
+        pointer-events: none;
       }
       &:not(:first-child):hover {
         background-color: $highlight-color;
@@ -65,10 +85,7 @@
     }
   }
 
-  // &--open {
-  &:hover {
-    overflow: visible;
-
+  &--open {
     &:after {
       transform: scaleY(-1);
     }

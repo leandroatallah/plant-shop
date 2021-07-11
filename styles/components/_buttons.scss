@@ -1,0 +1,40 @@
+.button {
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $primary-color;
+  box-sizing: border-box;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: $primary-color;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &--block {
+    display: flex;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    margin: 0 19px;
+  }
+
+  img {
+    display: inline-block;
+    margin-right: 17px;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    background-color: $primary-color;
+    color: $white;
+    text-decoration: none;
+
+    img {
+      filter: brightness(10);
+    }
+  }
+}
