@@ -1,14 +1,31 @@
 import 'regenerator-runtime/runtime';
 
 const selectComponent = document.querySelectorAll('.select-component');
+const hiddenList = document.querySelectorAll('input[type=hidden]');
+const plantList = document.getElementById('plant-list-container');
+const gridContainer = document.getElementById('grid-container');
+const noResult = document.getElementById('no-result');
+const skeleton = document.getElementById('plant-list-skeleton');
 
-async function getHiddenValues() {
-  const hiddenList = document.querySelectorAll('input[type=hidden]');
-  const plantList = document.getElementById('plant-list-container');
-  const gridContainer = document.getElementById('grid-container');
-  const noResult = document.getElementById('no-result');
-  const skeleton = document.getElementById('plant-list-skeleton');
+function createElementWithClass(tag, className, append) {
+  let elem = document.createElement(tag);
 
+  if (className) elem.classList.add(className);
+
+  if (append) {
+    if (append instanceof Array) {
+      for (let item of append) {
+        elem.appendChild(item);
+      }
+    } else {
+      elem.appendChild(append);
+    }
+  }
+
+  return elem;
+}
+
+async function getSelectComponentValues() {
   const filterValues = [];
 
   for (const hiddenItem of hiddenList) {
@@ -16,8 +33,8 @@ async function getHiddenValues() {
   }
 
   if (filterValues.length === 3) {
-    plantList.style.display = 'none';
-    noResult.style.display = 'none';
+    plantList.classList.add('hide');
+    noResult.classList.add('hide');
     skeleton.classList.remove('hide');
 
     await fetch(
@@ -28,86 +45,89 @@ async function getHiddenValues() {
 
         const result = await e.json();
 
-        for (const resultItem of result) {
+        function sortByFavorite(a, b) {
+          if (a.staff_favorite) {
+            return -1;
+          } else {
+            return 0;
+          }
+        }
+
+        const resultSortedByFavorite = result.sort(sortByFavorite);
+
+        for (const resultItem of resultSortedByFavorite) {
           const { name, price, url, staff_favorite, sun, water, toxicity } =
             resultItem;
 
-          let renderItem = document.createElement('div');
-          renderItem.classList.add('plant-list__item');
+          let elemThumb = createElementWithClass('div', 'plant-list__thumb');
+          elemThumb.style.backgroundImage = `url(${url})`;
 
-          let renderThumb = document.createElement('div');
-          renderThumb.classList.add('plant-list__thumb');
-          renderThumb.style.backgroundImage = `url(${url})`;
+          let elemTitleNode = document.createTextNode(name);
+          let elemTitle = createElementWithClass('h2', false, elemTitleNode);
 
-          let renderTitleNode = document.createTextNode(name);
-          let renderTitle = document.createElement('h2');
-          renderTitle.appendChild(renderTitleNode);
+          let elemPriceNode = document.createTextNode('$' + price);
+          let elemPrice = createElementWithClass('div', false, elemPriceNode);
 
-          let renderPriceNode = document.createTextNode('$' + price);
-          let renderPrice = document.createElement('div');
-          renderPrice.appendChild(renderPriceNode);
+          let elemIconSun = createElementWithClass('div', sun);
+          let elemIconWater = createElementWithClass('div', water);
+          let elemIconToxicity = createElementWithClass(
+            'div',
+            toxicity ? 'toxic' : 'pet'
+          );
 
-          let renderIcons = document.createElement('div');
-          renderIcons.classList.add('plant-list__icons');
+          let elemIcons = createElementWithClass('div', 'plant-list__icons', [
+            elemIconSun,
+            elemIconWater,
+            elemIconToxicity,
+          ]);
 
-          let renderIconSun = document.createElement('div');
-          renderIconSun.classList.add(sun);
-          let renderIconWater = document.createElement('div');
-          renderIconWater.classList.add(water);
-          let renderIconToxicity = document.createElement('div');
-          renderIconToxicity.classList.add(toxicity ? 'toxic' : 'pet');
-          renderIcons.appendChild(renderIconSun);
-          renderIcons.appendChild(renderIconWater);
-          renderIcons.appendChild(renderIconToxicity);
+          let elemMeta = createElementWithClass('div', 'plant-list__meta', [
+            elemTitle,
+            elemPrice,
+            elemIcons,
+          ]);
 
-          let renderMeta = document.createElement('div');
-          renderMeta.classList.add('plant-list__meta');
-
-          renderMeta.appendChild(renderTitle);
-          renderMeta.appendChild(renderPrice);
-          renderMeta.appendChild(renderIcons);
-
-          renderItem.appendChild(renderThumb);
-          renderItem.appendChild(renderMeta);
+          let elemItem = createElementWithClass('div', 'plant-list__item', [
+            elemThumb,
+            elemMeta,
+          ]);
 
           if (staff_favorite) {
-            renderItem.classList.add('plant-list__item--featured');
+            elemItem.classList.add('plant-list__item--featured');
 
-            let renderTag = document.createElement('div');
-            renderTag.classList.add('plant-list__featured-tag');
-            let renderPriceNode = document.createTextNode('✨ Staff favorite');
-            renderTag.appendChild(renderPriceNode);
+            let elemTag = createElementWithClass(
+              'div',
+              'plant-list__featured-tag'
+            );
+            let elemPriceNode = document.createTextNode('✨ Staff favorite');
+            elemTag.appendChild(elemPriceNode);
 
-            renderItem.appendChild(renderTag);
+            elemItem.appendChild(elemTag);
           }
 
-          gridContainer.appendChild(renderItem);
+          gridContainer.appendChild(elemItem);
           gridContainer.scrollLeft = 0;
         }
 
         setTimeout(function () {
           skeleton.classList.add('hide');
-          plantList.style.display = 'block';
+          plantList.classList.remove('hide');
         }, 500);
       })
       .catch(function () {
         skeleton.classList.add('hide');
-        plantList.style.display = 'none';
-        noResult.style.display = 'block';
+        plantList.classList.add('hide');
+        noResult.classList.remove('hide');
       });
   }
 }
 
-window.addEventListener('click', function (e) {
-  if (!e.target.classList.contains('select-component')) {
+for (const selectItem of selectComponent) {
+  selectItem.addEventListener('click', function openSelectOnClick() {
     for (const selectItem of selectComponent) {
       selectItem.className = 'select-component';
     }
-  }
-});
 
-for (const selectItem of selectComponent) {
-  selectItem.addEventListener('click', function () {
     if (selectItem.classList.contains('select-component--open')) {
       selectItem.className = 'select-component';
     } else {
@@ -118,7 +138,7 @@ for (const selectItem of selectComponent) {
   const listItem = selectItem.querySelectorAll('ul li');
 
   for (const listItemElem of listItem) {
-    listItemElem.addEventListener('click', function () {
+    listItemElem.addEventListener('click', function fetchHiddenInputs() {
       const target = selectItem.id;
       const hidden = document.querySelector(`input[name=${target}]`);
 
@@ -126,16 +146,24 @@ for (const selectItem of selectComponent) {
         hidden.value = listItemElem.id;
         listItem[0].textContent = listItemElem.textContent;
 
-        getHiddenValues();
+        getSelectComponentValues();
       }
     });
   }
 }
 
+window.addEventListener('click', function closeAllSelect(e) {
+  if (!e.target.classList.contains('select-component')) {
+    for (const selectItem of selectComponent) {
+      selectItem.className = 'select-component';
+    }
+  }
+});
+
 const buttonScroll = document.querySelectorAll('.scroll-button');
 
 for (const btn of buttonScroll) {
-  btn.addEventListener('click', function (e) {
+  btn.addEventListener('click', function scrollToSection(e) {
     e.preventDefault();
     const href = this.getAttribute('href');
     const offsetTop = document.querySelector(href).offsetTop;

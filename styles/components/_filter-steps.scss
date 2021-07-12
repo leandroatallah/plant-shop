@@ -18,6 +18,10 @@
   &__item {
     width: 25%;
 
+    @media (max-width: $breakpoint-tablet) {
+      width: 30%;
+    }
+
     @media (max-width: $breakpoint-mobile) {
       width: 100%;
       margin-bottom: 50px;
@@ -54,6 +58,7 @@
     background-image: url('../images/icons/select-arrow-down.svg');
     width: 18px;
     height: 9px;
+    transition: transform 0.25s ease;
   }
 
   ul {
@@ -65,6 +70,7 @@
     border: 1px solid $border-gray;
     border-radius: 19px;
     pointer-events: none;
+    overflow: hidden;
 
     li {
       padding: 0 18px;
