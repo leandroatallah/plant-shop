@@ -168,7 +168,7 @@ for (const btn of buttonScroll) {
     const href = this.getAttribute('href');
     const offsetTop = document.querySelector(href).offsetTop;
 
-    scroll({
+    window.scroll({
       top: offsetTop,
       behavior: 'smooth',
     });
