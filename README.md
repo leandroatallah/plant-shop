@@ -2,7 +2,7 @@
 
 ## Demo
 
-See the demo on Vercel: [https://vercel.com/leandroatallah/plant-shop](https://vercel.com/leandroatallah/plant-shop).
+See the demo on Vercel: [https://plant-shop.vercel.app/](https://plant-shop.vercel.app/).
 
 This project was made with:
 
